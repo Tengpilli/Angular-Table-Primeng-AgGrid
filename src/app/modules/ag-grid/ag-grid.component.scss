@@ -1,0 +1,32 @@
+.ag-theme-material .ag-icon-next:before {
+  content: ">" !important;
+}
+
+.ag-theme-material .ag-icon-last:before {
+  content: ">>" !important;
+}
+
+.ag-theme-material .ag-icon-previous:before {
+  content: "<" !important;
+}
+
+.ag-theme-material .ag-icon-first:before {
+  content: "<<" !important;
+}
+
+.ag-theme-acmecorp {
+  --ag-odd-row-background-color: #f5f5f5;
+}
+
+.ag-grid-action-buttons {
+  padding-bottom: 20px;
+}
+
+.ag-grid-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ag-grid-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}

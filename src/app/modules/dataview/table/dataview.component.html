@@ -1,0 +1,333 @@
+<div class="flex w-full box-border p-2 gap-x-3">
+  <div class="relative w-[25%] 2xl:w-[20%] box-border !text-[14px]">
+    <p-accordion [multiple]="true">
+      <p-accordionTab header="Email-To" class="line-height-3 m-0">
+        <div
+          class="flex flex-col w-full items-start justify-center gap-y-5 box-border p-2 !text-[12px]"
+        >
+          <div class="flex gap-x-2 w-full box-border">
+            <p-checkbox
+              [(ngModel)]="isAllToEmail"
+              (ngModelChange)="handleSelectAll({ value: 'toEmail' })"
+              [binary]="true"
+            ></p-checkbox>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                type="text"
+                pInputText
+                [(ngModel)]="toEmail"
+                (ngModelChange)="handleSearch({ value: 'toEmail' })"
+                placeholder="Search for Email-To"
+                class="w-full"
+              />
+            </span>
+          </div>
+          <div
+            class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll box-border! w-full"
+          >
+            <div
+              *ngFor="let selectedToEmail of toEmails; index as i"
+              class="flex items-start justify-start gap-x-2"
+            >
+              <p-checkbox
+                name="toEmailGroup"
+                [value]="selectedToEmail"
+                [(ngModel)]="selectedToEmails"
+                (ngModelChange)="handleChange()"
+                [inputId]="'i' + i"
+              ></p-checkbox>
+              <label [for]="'i' + i">{{ selectedToEmail }}</label>
+            </div>
+          </div>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab header="Email-From">
+        <div
+          class="flex flex-col w-full items-start justify-center gap-y-5 box-border p-2 !text-[12px]"
+        >
+          <div class="flex gap-x-2 w-full box-border">
+            <p-checkbox
+              [(ngModel)]="isAllFromEmail"
+              (ngModelChange)="handleSelectAll({ value: 'fromEmail' })"
+              [binary]="true"
+            ></p-checkbox>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                type="text"
+                pInputText
+                [(ngModel)]="fromEmail"
+                (ngModelChange)="handleSearch({ value: 'fromEmail' })"
+                placeholder="Search for Email-From"
+                class="w-full"
+              />
+            </span>
+          </div>
+          <div
+            class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll box-border !w-full"
+          >
+            <div
+              *ngFor="let selectedFromEmail of fromEmails; index as i"
+              class="flex items-start justify-start gap-x-2"
+            >
+              <p-checkbox
+                name="fromEmailGroup"
+                [value]="selectedFromEmail"
+                [(ngModel)]="selectedFromEmails"
+                (ngModelChange)="handleChange()"
+                [inputId]="'i' + i"
+              ></p-checkbox>
+              <label [for]="'i' + i">{{ selectedFromEmail }}</label>
+            </div>
+          </div>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab header="Name">
+        <div
+          class="flex flex-col w-full items-start justify-center gap-y-5 box-border p-2 !text-[12px]"
+        >
+          <div class="flex gap-x-2 w-full box-border">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                type="text"
+                pInputText
+                [(ngModel)]="name"
+                (ngModelChange)="handleSearch({ value: 'name' })"
+                placeholder="Search for First Name"
+                class="w-full"
+              />
+            </span>
+          </div>
+          <div
+            class="grid sm:max-[1430px]:grid-rows-2 min-[1440px]:grid-cols-2 gap-y-2 min-[1440px]:gap-x-3 !w-full box-border"
+          >
+            <div
+              class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll !w-full box-border border-2 border-solid border-[#f5f5f5]"
+            >
+              <div class="flex items-start justify-start gap-x-2">
+                <p-checkbox
+                  [(ngModel)]="isAllFirstName"
+                  (ngModelChange)="handleSelectAll({ value: 'firstName' })"
+                  [binary]="true"
+                  class="!text-[10px]"
+                ></p-checkbox
+                ><label for="firstName">All</label>
+              </div>
+              <div
+                *ngFor="let selectedFirstName of firstNames; index as i"
+                class="flex items-start justify-start gap-x-2"
+              >
+                <p-checkbox
+                  name="toEmailGroup"
+                  [value]="selectedFirstName"
+                  [(ngModel)]="selectedFirstNames"
+                  (ngModelChange)="handleChange()"
+                  [inputId]="'i' + i"
+                ></p-checkbox>
+                <label [for]="'i' + i">{{ selectedFirstName }}</label>
+              </div>
+            </div>
+            <div
+              class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll box-border pr-10"
+            >
+              <div class="flex items-start justify-start gap-x-2">
+                <p-checkbox
+                  [(ngModel)]="isAllLastName"
+                  (ngModelChange)="handleSelectAll({ value: 'lastName' })"
+                  [binary]="true"
+                ></p-checkbox
+                ><label for="lastName">All</label>
+              </div>
+              <div
+                *ngFor="let selectedLastName of lastNames; index as i"
+                class="flex items-start justify-start gap-x-2"
+              >
+                <p-checkbox
+                  name="toEmailGroup"
+                  [value]="selectedLastName"
+                  [(ngModel)]="selectedLastNames"
+                  (ngModelChange)="handleChange()"
+                  [inputId]="'i' + i"
+                ></p-checkbox>
+                <label [for]="'i' + i">{{ selectedLastName }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab header="Confidential Status">
+        <div class="!text-[12px]">
+          <p-triStateCheckbox
+            [(ngModel)]="isConfident"
+            (ngModelChange)="handleChange()"
+            label="Confident"
+          ></p-triStateCheckbox>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+
+  <div
+    class="w-[75%] 2xl:w-[80%] rounded-lg overflow-hidden border border-solid border-gray-300 p-1"
+  >
+    <p-table
+      #dt
+      [value]="tableData"
+      [(selection)]="selectedData"
+      dataKey="id"
+      styleClass="p-datatable-customers"
+      [rowHover]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [loading]="loading"
+      [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [filterDelay]="0"
+      [globalFilterFields]="['first_name', 'last_name', 'email', 'date_sent']"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">
+            <span class="flex whitespace-nowrap"
+              >ID
+              <p-sortIcon field="id"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="first_name">
+            <span class="flex whitespace-nowrap">
+              First Name <p-sortIcon field="first_name"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="last_name">
+            <span class="flex whitespace-nowrap">
+              Last Name <p-sortIcon field="last_name"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="email">
+            <span class="flex whitespace-nowrap">
+              Email <p-sortIcon field="email"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="gender">
+            <span class="flex whitespace-nowrap">
+              Gender <p-sortIcon field="gender"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="ip_address">
+            <span class="flex whitespace-nowrap">
+              IP Address <p-sortIcon field="ip_address"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="confidential_status">
+            <span class="flex whitespace-nowrap">
+              Confidental Status
+              <p-sortIcon field="confidential_status"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="file_type">
+            <span class="flex whitespace-nowrap">
+              File Type <p-sortIcon field="file_type"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="email_to">
+            <span class="flex whitespace-nowrap">
+              Email To <p-sortIcon field="email_to"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="email_from">
+            <span class="flex whitespace-nowrap">
+              Email From <p-sortIcon field="email_from"></p-sortIcon>
+            </span>
+          </th>
+          <th pSortableColumn="date_sent">
+            <span class="flex whitespace-nowrap">
+              Date sent <p-sortIcon field="date_sent"></p-sortIcon>
+            </span>
+          </th>
+
+          <th pSortableColumn="body" style="width: 11rem">
+            <span class="flex whitespace-nowrap">
+              Body <p-sortIcon field="body"></p-sortIcon>
+            </span>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr class="p-selectable-row">
+          <td>
+            <span class="p-column-title">ID</span>
+            {{ item.id }}
+          </td>
+          <td>
+            <span class="p-column-title">First Name</span>
+            <span class="image-text">{{ item.first_name }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Last Name</span>
+            <span class="image-text">{{ item.last_name }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Email</span>
+            {{ item.email }}
+          </td>
+          <td>
+            <span class="p-column-title">Gender</span>
+            <span [class]="'custombadge status-' + item.status">{{
+              item.gender
+            }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">IP Address</span>
+            <span [class]="'custombadge status-' + item.status">{{
+              item.ip_address
+            }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Confidental Status</span>
+            <span [class]="'custombadge status-' + item.status">
+              {{ item.confidential_status }}</span
+            >
+          </td>
+          <td>
+            <span class="p-column-title">File Type</span>
+            <span [class]="'custombadge status-' + item.status">{{
+              item.file_type
+            }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Email To</span>
+            <span [class]="'custombadge status-' + item.status">{{
+              item.email_to
+            }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Email From</span>
+            <span [class]="'custombadge status-' + item.status">{{
+              item.email_from
+            }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Date sent</span>
+            <span [class]="'custombadge status-' + item.status">{{
+              item.date_sent
+            }}</span>
+          </td>
+          <td [pTooltip]="item.body">
+            <span class="p-column-title">Body</span>
+            <span [class]="'custombadge status-' + item.body"
+              >{{ item.body.slice(0, 20) }}...</span
+            >
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">No Data found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

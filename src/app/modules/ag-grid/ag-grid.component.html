@@ -1,0 +1,227 @@
+<div class="flex w-full h-[90%] gap-x-2 box-border p-2">
+  <div
+    class="flex w-[20%] box-border rounded-xl overflow-y-scroll scroll-style-price border border-solid border=[#999999]"
+  >
+    <mat-accordion class="ag-grid-headers-align w-full" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Email-To </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="flex flex-col w-full gap-y-5">
+          <div
+            class="flex flex-1 w-full box-border justify-start items-center gap-x-2"
+          >
+            <mat-checkbox
+              [(ngModel)]="isAllToEmail"
+              (ngModelChange)="handleSelectAll({ value: 'toEmail' })"
+            >
+            </mat-checkbox>
+            <div
+              class="flex flex-1 w-[80%] box-border border border-solid border-[#f0f0f0] rounded-md p-2"
+            >
+              <span class="flex w-full text-[13px] gap-x-2"
+                ><mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="search"
+                ></mat-icon>
+                <input
+                  matInput
+                  type="search"
+                  [(ngModel)]="toEmail"
+                  (ngModelChange)="handleSearch({ value: 'toEmail' })"
+                  placeholder="Search for Email-To"
+                  class="border-none ring-0 outline-none w-[80%]"
+                />
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll box-border !w-full scroll-style"
+          >
+            <div
+              *ngFor="let selectedToEmail of toEmails; index as i"
+              class="flex items-start justify-start gap-x-2"
+            >
+              <mat-checkbox
+                name="toEmailGroup"
+                [checked]="isChecked(selectedToEmail, 'toEmail')"
+                [value]="selectedToEmail"
+                (change)="handleChange($event, 'toEmail')"
+                class="text-[13px]"
+                >{{ selectedToEmail }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Email-From </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="flex flex-col w-full gap-y-5">
+          <div
+            class="flex flex-1 w-full box-border justify-start items-center gap-x-2"
+          >
+            <mat-checkbox
+              [(ngModel)]="isAllFromEmail"
+              (ngModelChange)="handleSelectAll({ value: 'fromEmail' })"
+            >
+            </mat-checkbox>
+            <div
+              class="flex flex-1 w-[80%] box-border border border-solid border-[#f0f0f0] rounded-md p-2"
+            >
+              <span class="flex w-full text-[13px] gap-x-2"
+                ><mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="search"
+                ></mat-icon>
+                <input
+                  matInput
+                  type="search"
+                  [(ngModel)]="fromEmail"
+                  (ngModelChange)="handleSearch({ value: 'fromEmail' })"
+                  placeholder="Search for Email-From"
+                  class="border-none ring-0 outline-none w-[80%]"
+                />
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll box-border !w-full scroll-style"
+          >
+            <div
+              *ngFor="let selectedFromEmail of fromEmails; index as i"
+              class="flex items-start justify-start gap-x-2"
+            >
+              <mat-checkbox
+                [checked]="isChecked(selectedFromEmail, 'fromEmail')"
+                name="toEmailGroup"
+                [value]="selectedFromEmail"
+                (change)="handleChange($event, 'fromEmail')"
+                class="text-[13px]"
+                >{{ selectedFromEmail }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Name </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="flex flex-col w-full">
+          <div
+            class="flex flex-1 w-full box-border border border-solid border-[#f0f0f0] rounded-md p-2"
+          >
+            <span class="flex w-full text-[13px] gap-x-2"
+              ><mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="search"
+              ></mat-icon>
+              <input
+                matInput
+                type="search"
+                [(ngModel)]="name"
+                (ngModelChange)="handleSearch({ value: 'name' })"
+                placeholder="Search for Email-To"
+                class="border-none ring-0 outline-none w-[80%]"
+              />
+            </span>
+          </div>
+          <div
+            class="grid sm:max-[1430px]:grid-rows-2 min-[1440px]:grid-cols-2 gap-y-2 min-[1440px]:gap-x-3 !w-full scroll-style box-border"
+          >
+            <div class="flex flex-col w-full gap-y-5">
+              <div
+                class="flex flex-1 w-full box-border justify-start items-center gap-x-2"
+              >
+                <mat-checkbox
+                  [(ngModel)]="isAllFirstName"
+                  (ngModelChange)="handleSelectAll({ value: 'firstName' })"
+                  >All (First name)
+                </mat-checkbox>
+              </div>
+              <div
+                class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll box-border !w-full scroll-style"
+              >
+                <div
+                  *ngFor="let selectedFirstName of firstNames; index as i"
+                  class="flex items-start justify-start gap-x-2"
+                >
+                  <mat-checkbox
+                    [checked]="isChecked(selectedFirstName, 'firstName')"
+                    name="toEmailGroup"
+                    [value]="selectedFirstName"
+                    (change)="handleChange($event, 'firstName')"
+                    class="text-[13px]"
+                    >{{ selectedFirstName }}</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col w-full gap-y-5">
+              <div
+                class="flex flex-1 w-full box-border justify-start items-center gap-x-2"
+              >
+                <mat-checkbox
+                  [(ngModel)]="isAllLastName"
+                  (ngModelChange)="handleSelectAll({ value: 'lastName' })"
+                  >All (Last name)</mat-checkbox
+                >
+              </div>
+              <div
+                class="flex flex-col gap-y-1 justify-start items-start h-[200px] overflow-y-scroll box-border !w-full scroll-style"
+              >
+                <div
+                  *ngFor="let selectedLastName of lastNames; index as i"
+                  class="flex items-start justify-start gap-x-2"
+                >
+                  <mat-checkbox
+                    [checked]="isChecked(selectedLastName, 'lastName')"
+                    name="toEmailGroup"
+                    [value]="selectedLastName"
+                    (change)="handleChange($event, 'lastName')"
+                    class="text-[13px]"
+                    >{{ selectedLastName }}</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Confidential Status </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="flex flex-col w-full gap-y-5">
+          <mat-radio-group
+            aria-label="Select an option"
+            [(ngModel)]="isConfident"
+            (ngModelChange)="handleChange()"
+            class="flex flex-col"
+          >
+            <mat-radio-button [value]="null">All</mat-radio-button>
+            <mat-radio-button [value]="true">Confident</mat-radio-button>
+            <mat-radio-button [value]="false">Unconfident</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div
+    class="flex flex-row w-[80%] h-[100%] box-border border border-solid border-[#999999] rounded-xl overflow-hidden shadow-lg"
+  >
+    <ag-grid-angular
+      class="ag-theme-material w-full h-full ag-theme-acmecorp"
+      [gridOptions]="customerGridOptions"
+      [rowData]="tableData"
+      [pagination]="true"
+      [paginationPageSize]="pageSize"
+    >
+    </ag-grid-angular>
+  </div>
+</div>
